@@ -1,6 +1,7 @@
 /Temp
 /obj
-/library
+/Library
+/Assets/Orthello/Examples
 *.csproj
 *.unityproj
 *.sln
