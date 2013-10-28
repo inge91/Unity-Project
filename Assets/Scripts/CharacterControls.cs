@@ -10,6 +10,9 @@ public class CharacterControls : MonoBehaviour {
 	
 	float speed = 3;
 	float move_block = 150;
+	float jump_speed = 0;
+	
+	
 	
 	GameObject camera; 	
 	// Use this for initialization
@@ -43,6 +46,12 @@ public class CharacterControls : MonoBehaviour {
 		{
 			left = false;
 		}
+		Debug.Log (jump_speed);
+		if(Input.GetKeyDown (KeyCode.Space) && jump_speed == 0)
+		{
+			jump_speed = 5;
+		}
+
 	}
 	
 	void handleMotion()
@@ -55,9 +64,19 @@ public class CharacterControls : MonoBehaviour {
 		if(left)
 		{
 			transform.Translate(-speed, 0, 0);
-			moveCamera(-speed);
-			
+			moveCamera(-speed);	
 		}
+		// Translate jump no matter if it takes place
+		if(jump_speed > 0)
+		{	
+			transform.Translate (0, jump_speed, 0);
+			jump_speed -= 0.1f;
+			if(jump_speed < 0)
+			{
+				jump_speed = 0;
+			}
+		}
+		
 	}
 	
 	void moveCamera(float offset)
