@@ -5,24 +5,23 @@ public class CharacterControls : MonoBehaviour {
 	
 	bool right = false;
 	bool left = false;
-	bool up = false;
-	bool down = false;
 	
 	float speed = 3;
 	float move_block = 150;
 	float jump_speed = 0;
 	
+	// use new to confirm that UnityEngine.Component.camera is being shadowed
+	new GameObject camera; 	
 	
-	
-	GameObject camera; 	
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		camera = GameObject.FindGameObjectWithTag("MainCamera");
 	}
 	
 	// Update is called once per frame
-	void Update () {	
-		Debug.Log (camera.transform.position);
+	void Update () 
+	{	
 		handleInput();
 		handleMotion();
 	}
