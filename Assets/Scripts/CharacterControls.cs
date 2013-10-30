@@ -5,12 +5,10 @@ public class CharacterControls : MonoBehaviour {
 	
 	bool right = false;
 	bool left = false;
-	bool up = false;
-	bool down = false;
+	bool jumping = false;
 	
 	float speed = 3;
 	float move_block = 150;
-	float jump_speed = 0;
 	
 	
 	
@@ -24,6 +22,14 @@ public class CharacterControls : MonoBehaviour {
 	void Update () {	
 		handleInput();
 		handleMotion();
+	}
+
+	void OnCollisionEnter(Collision obj)
+	{
+		// if we've landed on the cube, we're not falling anymore
+		if (obj.gameObject.name == "Cube") {
+			jumping = false;
+		}
 	}
 	
 	void handleInput()
@@ -48,9 +54,10 @@ public class CharacterControls : MonoBehaviour {
 			left = false;
 		}
 
-		if(Input.GetKeyDown (KeyCode.Space))
+		if(Input.GetKeyDown (KeyCode.Space) && !jumping)
 		{
 			rigidbody.velocity += 300 * Vector3.up;
+			jumping = true;
 		}
 
 	}
@@ -62,6 +69,7 @@ public class CharacterControls : MonoBehaviour {
 			transform.Translate(speed, 0, 0);
 			moveCamera(speed);
 		}
+
 		if(left)
 		{
 			transform.Translate(-speed, 0, 0);
@@ -80,6 +88,4 @@ public class CharacterControls : MonoBehaviour {
 			camera.transform.Translate (offset, 0, 0);
 		}	
 	}
-	
-	
 }
