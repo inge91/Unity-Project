@@ -16,6 +16,9 @@ public class CharacterControls : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		camera = GameObject.FindGameObjectWithTag("MainCamera");
+
+		// set physics constraints
+		rigidbody.freezeRotation = true;
 	}
 	
 	// Update is called once per frame
